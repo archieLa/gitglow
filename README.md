@@ -116,4 +116,5 @@ GPL v3 License - see [LICENSE](LICENSE) for details.
 
 ---
 
+*Built with AI assistance, guided by experienced human engineering.* 🤖⚡  
 Made with ❤️ for developers who love to see their code come to life!
