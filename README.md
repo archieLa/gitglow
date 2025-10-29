@@ -94,7 +94,11 @@ GitGlow uses a smart polling strategy to stay within rate limits:
 
 ## 📋 License
 
-MIT License - see [LICENSE](LICENSE) for details.
+GPL v3 License - see [LICENSE](LICENSE) for details.
+
+**Commercial Use**: You can sell GitGlow hardware products! The GPL protects the software from being used in proprietary products while allowing you to build and sell complete devices.
+
+**DIY Friendly**: Hobbyists and makers can freely use, modify, and share improvements to the code.
 
 ## 🤝 Contributing
 
