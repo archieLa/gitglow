@@ -1,0 +1,109 @@
+# GitGlow .gitignore
+# Exclude files that shouldn't be in version control
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# Virtual Environments
+env/
+venv/
+.venv/
+ENV/
+env.bak/
+venv.bak/
+
+# Environment Variables
+.env
+.env.local
+.env.development
+.env.test
+.env.production
+
+# IDE and Editors
+.vscode/settings.json
+.vscode/launch.json
+.idea/
+*.swp
+*.swo
+*~
+
+# Logs
+*.log
+logs/
+gitglow.log
+
+# Configuration Files (protect sensitive data)
+config/local_config.yaml
+config/secrets.yaml
+config/production.yaml
+*.secret
+
+# Hardware Simulation
+.fake_rpi_state
+hardware_sim/
+
+# Session Context (exclude from repository)
+CONTEXT.md
+context.md
+session_context.md
+
+# OS Generated Files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Temporary Files
+*.tmp
+*.temp
+.cache/
+.pytest_cache/
+
+# Documentation Build
+docs/_build/
+docs/build/
+
+# Coverage Reports
+htmlcov/
+.coverage
+.coverage.*
+coverage.xml
+
+# Jupyter Notebooks
+.ipynb_checkpoints
+
+# mypy
+.mypy_cache/
+.dmypy.json
+dmypy.json
+
+# Hardware-specific
+gpio_state.json
+led_calibration.json
+
+# Runtime Data
+*.pid
+*.sock
