@@ -110,9 +110,11 @@ GPL v3 License - see [LICENSE](LICENSE) for details.
 
 ## 📞 Support
 
-- [Issues](https://github.com/yourusername/gitglow/issues)
-- [Discussions](https://github.com/yourusername/gitglow/discussions)
-- [Wiki](https://github.com/yourusername/gitglow/wiki)
+- **Issues**: [GitHub Issues](https://github.com/archieLa/gitglow/issues) - Report bugs or request features
+- **Discussions**: [GitHub Discussions](https://github.com/archieLa/gitglow/discussions) - Community support and ideas
+- **Documentation**: Check the `docs/` folder for detailed guides
+
+*More support channels coming soon as the project develops!*
 
 ---
 
