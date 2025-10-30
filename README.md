@@ -1,37 +1,63 @@
+WIP
+
 # GitGlow 🌟
 
-A beautiful GitHub LED matrix display for Raspberry Pi Zero that shows your GitHub contribution graph and lights up with pull request notifications.
+A beautiful GitHub LED matrix display for embedded platforms that shows your GitHub contribution graph and lights up with pull request notifications.
 
 ## ✨ Features
 
 - **7x32 LED Matrix**: Displays GitHub contribution graph (like github.com)
 - **LED Notification Bar**: Lights up for PR events (open, merge, comments)
+- **Multi-Platform Support**: ESP32 and Raspberry Pi Zero targets
 - **Web Interface**: Easy configuration through captive portal
 - **Smart Rate Limiting**: Stays within GitHub's 5,000 requests/hour limit
 - **Auto-Setup**: Captive portal for WiFi and GitHub token configuration
-- **Raspberry Pi Zero**: Optimized for minimal hardware
+- **Cross-Platform**: Single C++ codebase for multiple embedded platforms
 
 ## 🛠 Hardware Requirements
 
+### ESP32 Target (Recommended)
+- ESP32 development board (ESP32-WROOM, NodeMCU, etc.)
+- 8x32 WS2812B LED Matrix (256 pixels)
+- MicroSD card (optional, for configuration storage)
+- 5V power supply (3A recommended)
+
+### Raspberry Pi Target
 - Raspberry Pi Zero W/WH
 - 8x32 WS2812B LED Matrix (256 pixels)
 - MicroSD card (16GB+)
 - 5V power supply (3A recommended)
-- Optional: LED strip for notification bar
 
 ## 📦 Installation
 
-### Quick Setup
+### Quick Setup (ESP32)
 ```bash
-curl -sSL https://raw.githubusercontent.com/yourusername/gitglow/main/scripts/install.sh | bash
+# Install ESP-IDF
+git clone --recursive https://github.com/espressif/esp-idf.git
+cd esp-idf && ./install.sh && source ./export.sh
+
+# Clone and build for ESP32
+git clone https://github.com/archieLa/gitglow.git
+cd gitglow
+mkdir build && cd build
+cmake -DTARGET_PLATFORM=ESP32 ..
+make -j4
+make flash
 ```
 
-### Manual Installation
-1. Flash Raspberry Pi OS Lite to SD card
-2. Enable SSH and WiFi
-3. Clone this repository
-4. Run installation script
-5. Configure through web interface
+### Quick Setup (Raspberry Pi)
+```bash
+# Install dependencies
+sudo apt update && sudo apt install cmake build-essential
+
+# Clone and build for Pi
+git clone https://github.com/archieLa/gitglow.git
+cd gitglow
+mkdir build && cd build
+cmake -DTARGET_PLATFORM=RASPBERRY_PI ..
+make
+sudo ./gitglow
+```
 
 ## 🔧 Configuration
 
@@ -45,36 +71,49 @@ curl -sSL https://raw.githubusercontent.com/yourusername/gitglow/main/scripts/in
 
 ```
 gitglow/
-├── src/gitglow/           # Core application
-│   ├── api/              # GitHub API client
-│   ├── display/          # LED matrix control
-│   ├── web/              # Web interface
-│   └── config/           # Configuration management
-├── docs/                 # Documentation
-├── hardware/             # Wiring diagrams
-├── scripts/              # Installation scripts
-├── config/               # Configuration files
-└── tests/                # Test suite
+├── src/
+│   ├── common/              # Shared application logic
+│   │   ├── github_api.cpp   # GitHub API client
+│   │   ├── led_controller.cpp # LED matrix control
+│   │   └── web_server.cpp   # Configuration interface
+│   ├── platforms/           # Platform-specific implementations
+│   │   ├── esp32/           # ESP32 platform layer
+│   │   └── raspberry_pi/    # Raspberry Pi platform layer
+│   └── interfaces/          # Abstract platform interfaces
+├── build_configs/           # Platform build configurations
+├── docs/                    # Documentation
+├── hardware/                # Wiring diagrams
+└── examples/                # Platform-specific examples
 ```
 
 ## 🚀 Development
 
-### Local Development
+### Build for ESP32
 ```bash
-python -m venv venv
-source venv/bin/activate
-pip install -r requirements.txt
-python -m pytest
+# Using ESP-IDF + CMake
+source $IDF_PATH/export.sh
+mkdir build && cd build
+cmake -DTARGET_PLATFORM=ESP32 ..
+make -j4
+make flash monitor
 ```
 
-### Hardware Testing
+### Build for Raspberry Pi
 ```bash
-# Test LED matrix without GitHub API
-python src/gitglow/display/test_matrix.py
+# Cross-platform C++ build
+mkdir build && cd build
+cmake -DTARGET_PLATFORM=RASPBERRY_PI ..
+make -j4
 
-# Test GitHub API integration
-python src/gitglow/api/test_github.py
+# Install system service
+sudo make install
 ```
+
+### Adding New Platforms
+1. Create new platform directory in `src/platforms/your_platform/`
+2. Implement the `IPlatform` interface
+3. Add build configuration in `build_configs/`
+4. Update CMakeLists.txt or platformio.ini
 
 ## 📊 GitHub API Usage
 
